@@ -1,0 +1,37 @@
+{
+  "name": "glance",
+  "version": "1.0.0",
+  "description": "Get a quick glance at your company's overall metrics.",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "glance",
+    "api",
+    "metrics"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "app-module-path": "^1.0.6",
+    "boom": "^3.2.1",
+    "confidence": "^3.0.0",
+    "express": "^4.13.4",
+    "glob": "^7.0.3",
+    "glue": "^3.2.1",
+    "hapi": "^13.4.1",
+    "hapi-auth-jwt2": "^7.0.0",
+    "hapi-swagger": "^5.1.0",
+    "inert": "^4.0.0",
+    "joi": "^8.1.1",
+    "jsonwebtoken": "^7.0.0",
+    "mongoose": "^4.4.17",
+    "studio": "^0.13.1",
+    "vision": "^4.1.0"
+  },
+  "devDependencies": {
+    "standard": "^7.1.0"
+  }
+}
