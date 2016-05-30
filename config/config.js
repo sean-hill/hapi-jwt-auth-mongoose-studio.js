@@ -28,7 +28,7 @@ internals.config = {
       debug: true
     },
     $default: {
-      uri: 'mongodb://glance-admin:glAnc3@localhost:27017/glance',
+      uri: 'mongodb://localhost/echo-dev',
       debug: true
     }
   },
@@ -36,7 +36,7 @@ internals.config = {
   // JWT Auth
   //
   jwtAuth: {
-    secret: 'Glance Secret'
+    secret: 'App Secret'
   }
 }
 
