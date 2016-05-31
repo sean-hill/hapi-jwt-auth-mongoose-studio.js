@@ -77,6 +77,16 @@ internals.manifest = {
         }
       }
     },
+    // Auth Routes
+    {
+      plugin: './app/routes/auth',
+      options: {
+        select: ['web-app'],
+        routes: {
+          prefix: '/auth'
+        }
+      }
+    },
     // User Routes
     {
       plugin: './app/routes/user',
