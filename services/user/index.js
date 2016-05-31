@@ -9,11 +9,22 @@ const AuthService = Studio.module('Auth')
 
 class User {
   /**
-   * Create a new uesr
+   * Create a new user
    */
   * create (userData) {
-    var newUser = yield new UserModel(userData).save(Studio.defer())
+    let newUser = yield new UserModel(userData).save(Studio.defer())
     return AuthService('sign')(newUser._id)
+  }
+  /**
+   * Get a user by _id
+   */
+  * get (userId) {
+    let user = yield UserModel.findById(userId, Studio.defer())
+    if (!user) {
+      throw (new Error('No user found by that _id.'))
+    } else {
+      return user
+    }
   }
 }
 

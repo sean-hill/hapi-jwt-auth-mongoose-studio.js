@@ -3,17 +3,13 @@
 'use strict'
 
 const Boom = require('boom')
-const Mongoose = require('mongoose')
-const UserModel = Mongoose.model('User')
+const Studio = require('studio')
+const Services = Studio.services()
 
 module.exports = (request, reply) => {
-  var userId = request.auth.credentials._id
-
-  UserModel.findById(userId, (err, user) => {
-    if (err) {
-      reply(Boom.badRequest('Issue getting user'))
-    } else {
-      reply(user)
-    }
+  Services.User.get(request.auth.credentials._id).then((user) => {
+    reply(user)
+  }).catch((err) => {
+    reply(Boom.badRequest(err.message))
   })
 }
