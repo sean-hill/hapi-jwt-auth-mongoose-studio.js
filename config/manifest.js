@@ -67,7 +67,17 @@ internals.manifest = {
         select: ['web-app']
       }
     },
-    // User Route
+    // Core Routes
+    {
+      plugin: './app/routes/core',
+      options: {
+        select: ['web-app'],
+        routes: {
+          prefix: '/core'
+        }
+      }
+    },
+    // User Routes
     {
       plugin: './app/routes/user',
       options: {
