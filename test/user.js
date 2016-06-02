@@ -25,7 +25,7 @@ lab.experiment('User', () => {
   /**
    *  Test Server Status
    */
-  lab.test('Test 123', (done) => {
+  lab.test('GET /core/status', (done) => {
     let options = {
       method: 'GET',
       url: '/core/status'
