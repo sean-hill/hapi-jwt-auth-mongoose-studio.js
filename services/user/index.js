@@ -5,7 +5,7 @@
 const Studio = require('studio')
 const Mongoose = require('mongoose')
 const UserModel = Mongoose.model('User')
-const AuthService = Studio.module('Auth')
+const Services = Studio.services()
 
 class User {
   /**
@@ -13,7 +13,7 @@ class User {
    */
   * create (userData) {
     let newUser = yield new UserModel(userData).save(Studio.defer())
-    return AuthService('sign')(newUser._id)
+    return Services.Auth.sign(newUser._id)
   }
   /**
    * Get a user by _id
