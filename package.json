@@ -4,7 +4,7 @@
   "description": "Get a quick glance at your company's overall metrics.",
   "main": "index.js",
   "scripts": {
-    "test": "lab",
+    "test": "lab --ignore _Promise,clone,exceptions",
     "start": "nodemon index.js"
   },
   "keywords": [

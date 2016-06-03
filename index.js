@@ -1,10 +1,9 @@
-// Server
+// Index
 
 'use strict'
 
-const Server = require('./server')
+const App = require('./app')
 
-exports.init = (ready) => {
-  Server.init(ready)
-  require('./services')
-}
+App.init().then(() => {
+  console.log('App Started')
+})
