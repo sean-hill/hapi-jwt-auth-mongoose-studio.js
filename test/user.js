@@ -56,7 +56,7 @@ lab.experiment('User', { timeout: 10000 }, () => {
         method: 'POST',
         url: '/user/create',
         payload: {
-          email: new Date().getTime() + '@email.com',
+          email: `${new Date().getTime()}@email.com`,
           password: 'password'
         }
       })

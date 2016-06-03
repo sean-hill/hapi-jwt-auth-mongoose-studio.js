@@ -4,4 +4,15 @@ Example hapi boilerplate that uses [mongoose](http://mongoosejs.com/) and [Studi
 
 ## Requirements
 
-`node >= 6`
+  	node >= 6
+
+## Usage
+
+    $ npm install -g lab
+    $ npm install
+    $ npm start    
+Navigate to `http://localhost:3000/app-docs` for API documentation.
+
+## Tests
+
+    $ npm test
