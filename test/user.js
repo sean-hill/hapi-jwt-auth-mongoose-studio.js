@@ -5,9 +5,8 @@ const App = require('../app')
 
 lab.experiment('User', { timeout: 10000 }, () => {
   let Server
-  /**
-   * Initialize App before tests
-   */
+
+  // Before tests
   lab.before((done) => {
     App.init().then((server) => {
       Server = server
@@ -15,31 +14,58 @@ lab.experiment('User', { timeout: 10000 }, () => {
     })
   })
 
-  /**
-   *  User Create
-   */
-  lab.test('User Create', (done) => {
-    // Test with no payload
-    let noPayLoad = Server
+  // Test with no payload
+  lab.test('Create - No Payload', (done) => {
+    return Server
       .select('web-app')
       .inject({
         method: 'POST',
         url: '/user/create'
       })
+      .then((response) => {
+        Code.expect(response.statusCode).to.equal(400)
+        Code.expect(response.result).to.be.a.object()
+      })
+  })
 
-    // Test with bad email
-    let badEmail = Server
+  // Test with no email
+  lab.test('Create - No Email', (done) => {
+    return Server
       .select('web-app')
       .inject({
         method: 'POST',
         url: '/user/create',
         payload: {
-          email: 'badEmail'
+          password: 'password'
         }
       })
+      .then((response) => {
+        Code.expect(response.statusCode).to.equal(400)
+        Code.expect(response.result).to.be.a.object()
+      })
+  })
 
-    // Test with no password
-    let noPassword = Server
+  // Test a bad email
+  lab.test('Create - Bad Email', (done) => {
+    return Server
+      .select('web-app')
+      .inject({
+        method: 'POST',
+        url: '/user/create',
+        payload: {
+          email: 'badEmail',
+          password: 'password'
+        }
+      })
+      .then((response) => {
+        Code.expect(response.statusCode).to.equal(400)
+        Code.expect(response.result).to.be.a.object()
+      })
+  })
+
+  // Test with no password
+  lab.test('Create - No Password', (done) => {
+    return Server
       .select('web-app')
       .inject({
         method: 'POST',
@@ -48,9 +74,15 @@ lab.experiment('User', { timeout: 10000 }, () => {
           email: 'email@email.com'
         }
       })
+      .then((response) => {
+        Code.expect(response.statusCode).to.equal(400)
+        Code.expect(response.result).to.be.a.object()
+      })
+  })
 
-    // Test with valid user
-    let goodUser = Server
+  // Test with valid user
+  lab.test('Create - Bad Email', (done) => {
+    return Server
       .select('web-app')
       .inject({
         method: 'POST',
@@ -59,23 +91,6 @@ lab.experiment('User', { timeout: 10000 }, () => {
           email: `${new Date().getTime()}@email.com`,
           password: 'password'
         }
-      })
-
-    return noPayLoad
-      .then((response) => {
-        Code.expect(response.statusCode).to.equal(400)
-        Code.expect(response.result).to.be.a.object()
-        return badEmail
-      })
-      .then((response) => {
-        Code.expect(response.statusCode).to.equal(400)
-        Code.expect(response.result).to.be.a.object()
-        return noPassword
-      })
-      .then((response) => {
-        Code.expect(response.statusCode).to.equal(400)
-        Code.expect(response.result).to.be.a.object()
-        return goodUser
       })
       .then((response) => {
         Code.expect(response.statusCode).to.equal(200)
