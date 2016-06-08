@@ -38,6 +38,7 @@ internals.manifest = {
     {
       plugin: 'inert'
     },
+    // Swagger Plugin
     {
       plugin: {
         register: 'hapi-swagger',
@@ -47,6 +48,26 @@ internals.manifest = {
             version: '1.0.0'
           },
           documentationPath: '/app-docs'
+        }
+      }
+    },
+    // Logging Plugin
+    {
+      plugin: {
+        register: 'good',
+        options: {
+          ops: {
+            interval: 1000
+          },
+          reporters: {
+            console: [{
+              module: 'good-squeeze',
+              name: 'Squeeze',
+              args: [{ log: '*', response: '*' }]
+            }, {
+              module: 'good-console'
+            }, 'stdout']
+          }
         }
       }
     },
