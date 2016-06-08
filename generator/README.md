@@ -8,6 +8,6 @@ Where `type` is `route`, `model`, or `service` and `name` is the name of your ty
 
 ## Examples
 
-    $ npm generate route user
-    $ npm generate model user
-    $ npm generate service user
+    $ npm run generate api route user
+    $ npm run generate model user
+    $ npm run generate service user
