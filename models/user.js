@@ -5,6 +5,7 @@
 const Mongoose = require('mongoose')
 const Schema = Mongoose.Schema
 const Crypto = require('crypto')
+const UniqueValidator = require('mongoose-unique-validator')
 
 var UserSchema = new Schema({
   firstName: {
@@ -78,4 +79,12 @@ UserSchema.methods.authenticate = function (password) {
   return this.password === this.hashPassword(password)
 }
 
+/**
+ * Unique Validator Plugin
+ */
+UserSchema.plugin(UniqueValidator)
+
+/**
+ * Register Schema
+ */
 Mongoose.model('User', UserSchema)
