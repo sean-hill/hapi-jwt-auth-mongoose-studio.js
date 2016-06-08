@@ -3,31 +3,31 @@ const Lab = require('lab')
 const lab = exports.lab = Lab.script()
 const App = require('../app')
 
-lab.experiment('User', () => {
+const describe = lab.describe
+const it = lab.it
+const before = lab.before
+const expect = Code.expect
+
+describe('Core Requests', () => {
   let Server
-  /**
-   * Initialize App before tests
-   */
-  lab.before((done) => {
+
+  before((done) => {
     App.init().then((server) => {
       Server = server
       done()
     })
   })
 
-  /**
-   *  Test Server Status
-   */
-  lab.test('App Server Status', (done) => {
-    let options = {
-      method: 'GET',
-      url: '/core/status'
-    }
-
-    Server.select('web-app').inject(options, (response) => {
-      Code.expect(response.statusCode).to.equal(200)
-      Code.expect(response.result).to.be.a.string()
-      done()
-    })
+  it('returns the web apps status', (done) => {
+    return Server
+      .select('web-app')
+      .inject({
+        method: 'GET',
+        url: '/core/status'
+      })
+      .then(function (response) {
+        expect(response.statusCode).to.equal(200)
+        expect(response.result).to.be.a.string()
+      })
   })
 })

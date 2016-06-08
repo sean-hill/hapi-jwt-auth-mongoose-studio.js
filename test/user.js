@@ -3,19 +3,22 @@ const Lab = require('lab')
 const lab = exports.lab = Lab.script()
 const App = require('../app')
 
-lab.experiment('User', { timeout: 10000 }, () => {
+const describe = lab.describe
+const it = lab.it
+const before = lab.before
+const expect = Code.expect
+
+describe('User Requests', { timeout: 10000 }, () => {
   let Server
 
-  // Before tests
-  lab.before((done) => {
+  before((done) => {
     App.init().then((server) => {
       Server = server
       done()
     })
   })
 
-  // Test with no payload
-  lab.test('Create - No Payload', (done) => {
+  it('rejects a request with no payload', () => {
     return Server
       .select('web-app')
       .inject({
@@ -23,13 +26,12 @@ lab.experiment('User', { timeout: 10000 }, () => {
         url: '/user/create'
       })
       .then((response) => {
-        Code.expect(response.statusCode).to.equal(400)
-        Code.expect(response.result).to.be.a.object()
+        expect(response.statusCode).to.equal(400)
+        expect(response.result).to.be.a.object()
       })
   })
 
-  // Test with no email
-  lab.test('Create - No Email', (done) => {
+  it('rejects a request with no email', () => {
     return Server
       .select('web-app')
       .inject({
@@ -40,13 +42,12 @@ lab.experiment('User', { timeout: 10000 }, () => {
         }
       })
       .then((response) => {
-        Code.expect(response.statusCode).to.equal(400)
-        Code.expect(response.result).to.be.a.object()
+        expect(response.statusCode).to.equal(400)
+        expect(response.result).to.be.a.object()
       })
   })
 
-  // Test a bad email
-  lab.test('Create - Bad Email', (done) => {
+  it('rejects a request with an invalid email', () => {
     return Server
       .select('web-app')
       .inject({
@@ -58,13 +59,12 @@ lab.experiment('User', { timeout: 10000 }, () => {
         }
       })
       .then((response) => {
-        Code.expect(response.statusCode).to.equal(400)
-        Code.expect(response.result).to.be.a.object()
+        expect(response.statusCode).to.equal(400)
+        expect(response.result).to.be.a.object()
       })
   })
 
-  // Test with no password
-  lab.test('Create - No Password', (done) => {
+  it('rejects a request with no password', () => {
     return Server
       .select('web-app')
       .inject({
@@ -75,13 +75,12 @@ lab.experiment('User', { timeout: 10000 }, () => {
         }
       })
       .then((response) => {
-        Code.expect(response.statusCode).to.equal(400)
-        Code.expect(response.result).to.be.a.object()
+        expect(response.statusCode).to.equal(400)
+        expect(response.result).to.be.a.object()
       })
   })
 
-  // Test with valid user
-  lab.test('Create - Bad Email', (done) => {
+  it('creates a new user', () => {
     return Server
       .select('web-app')
       .inject({
@@ -93,8 +92,8 @@ lab.experiment('User', { timeout: 10000 }, () => {
         }
       })
       .then((response) => {
-        Code.expect(response.statusCode).to.equal(200)
-        Code.expect(response.result).to.be.a.string()
+        expect(response.statusCode).to.equal(200)
+        expect(response.result).to.be.a.string()
       })
   })
 })
