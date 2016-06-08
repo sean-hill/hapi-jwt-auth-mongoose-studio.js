@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "lab --ignore _Promise,clone,exceptions",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "generate": "node ./generator"
   },
   "keywords": [
     "glance",
@@ -33,10 +34,12 @@
     "jsonwebtoken": "^7.0.0",
     "lab": "^10.7.1",
     "mongoose": "^4.4.17",
+    "string": "^3.3.1",
     "studio": "^0.13.1",
     "vision": "^4.1.0"
   },
   "devDependencies": {
-    "standard": "^7.1.0"
+    "standard": "^7.1.0",
+    "writefile": "^0.2.8"
   }
 }
